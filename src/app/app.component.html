@@ -1,8 +1,7 @@
-
 <div>
-<input #testInput type="text">
+  <input #testInput type="text">
 
-<button (click)="onInput(testInput.value)">Show input value!</button>
+  <button (click)="onInput(testInput.value)">Show input value!</button>
 </div>
 
 <h4>{{inputtedValue}}</h4>
@@ -15,7 +14,7 @@
 <button (click)="showRegisterForm()">Show Register Form</button>
 <p></p>
 <p></p>
-<form  *ngIf="formLogin">
+<form *ngIf="formLogin">
   <label>
     E-mail:
     <input type="text">
@@ -54,13 +53,13 @@
 <button (click)="showHouses()">Show All Houses</button>
 
 <div *ngIf="housesList">
-<div *ngFor="let house of houses">
-  <p></p>
-  City: {{house.city}}
-  Street: {{house.street}}
-  Square: {{house.square}}
-  Price: {{house.price}}
-</div>
+  <div *ngFor="let house of houses">
+    <p></p>
+    City: {{house.city}}
+    Street: {{house.street}}
+    Square: {{house.square}}
+    Price: {{house.price}}
+  </div>
 </div>
 <p></p>
 <p></p>

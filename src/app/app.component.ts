@@ -7,13 +7,11 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-app';
-
   inputtedValue = '';
   formLogin = false;
   formRegister = false;
   housesList = false;
   findedHouses = [];
-
   houses = [
     {city: 'Lviv', street: 'Shevchenka', square: 200, price: 80000},
     {city: 'Kyiv', street: 'Naukova', square: 150, price: 50000},
