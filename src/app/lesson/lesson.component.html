@@ -1,0 +1,122 @@
+<p>lesson works!</p>
+
+<p></p>
+<p></p>
+
+<h1 [style.background]="'green'" [style.color]="'white'">Hello</h1>
+<p></p>
+<h2 [ngStyle]="{backgroundColor: isError ? 'red' : 'green', color: 'orange'}">Hello world!</h2>
+
+<p></p>
+<h2 [class.green-bg]="true">Test Styles</h2>
+
+<p></p>
+<h2 [ngClass]="['white-color', isError ? 'red-bg' : 'green-bg']">About ng-class</h2>
+
+<p></p>
+<h2 [ngClass]="{'green-bg': isError, 'red-bg': !isError, 'white-color': true}"> Book shop</h2>
+
+<p></p>
+<h2 [ngClass]="classes">Roses</h2>
+
+<p></p>
+<p></p>
+
+<!--<form #myform="ngForm" (ngSubmit)="sendForm(myform)">-->
+<!--  <label>Name</label>-->
+<!--  <input-->
+<!--    type="text"-->
+<!--    name="name"-->
+<!--    ngModel-->
+<!--  >-->
+<!--  <label>Gender</label>-->
+<!--  <input-->
+<!--    type="radio"-->
+<!--    name="gender"-->
+<!--    value="male"-->
+<!--    ngModel-->
+<!--  >-->
+<!--  <input-->
+<!--    type="radio"-->
+<!--    name="gender"-->
+<!--    value="female"-->
+<!--    ngModel-->
+<!--  >-->
+<!--  <label>Skills</label>-->
+<!--  <input-->
+<!--    type="checkbox"-->
+<!--    name="js"-->
+<!--    ngModel-->
+<!--  >-->
+<!--  <input-->
+<!--    type="checkbox"-->
+<!--    name="node"-->
+<!--    ngModel-->
+<!--  >-->
+<!--  <input-->
+<!--    type="checkbox"-->
+<!--    name="angular"-->
+<!--    ngModel-->
+<!--  >-->
+<!--  <select name="position" ngModel>-->
+<!--    <option value="JUNIOR">JUNIOR</option>-->
+<!--    <option value="MIDDLE">MIDDLE</option>-->
+<!--    <option value="SENIOR">SENIOR</option>-->
+<!--  </select>-->
+<!--  <button>Send</button>-->
+<!--</form>-->
+<p></p>
+<p></p>
+
+<form #myform="ngForm" (ngSubmit)="sendForm(myform)">
+  <label [ngStyle]="{color: !nameI.valid && nameI.touched ? 'red' : 'black'}">Name</label>
+  <input
+    #nameI="ngModel"
+    type="text"
+    name="name"
+    [(ngModel)]="developer.name"
+    required
+  >
+  <label>Email</label>
+  <input
+    type="text"
+    name="email"
+    [(ngModel)]="developer.email"
+    email
+  >
+  <label>Gender</label>
+  <input
+    type="radio"
+    name="gender"
+    value="male"
+    [(ngModel)]="developer.gender"
+  >
+  <input
+    type="radio"
+    name="gender"
+    value="female"
+    [(ngModel)]="developer.gender"
+  >
+  <label>Skills</label>
+  <input
+    type="checkbox"
+    name="js"
+    [(ngModel)]="developer.js"
+  >
+  <input
+    type="checkbox"
+    name="node"
+    [(ngModel)]="developer.node"
+  >
+  <input
+    type="checkbox"
+    name="angular"
+    [(ngModel)]="developer.angular"
+  >
+  <select name="position" [(ngModel)]="developer.position">
+    <option value="JUNIOR">JUNIOR</option>
+    <option value="MIDDLE">MIDDLE</option>
+    <option value="SENIOR">SENIOR</option>
+  </select>
+  <button [disabled]="!myform.valid">Send</button>
+</form>

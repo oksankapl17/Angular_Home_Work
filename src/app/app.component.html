@@ -1,19 +1,13 @@
 <div>
   <input #testInput type="text">
-
   <button (click)="onInput(testInput.value)">Show input value!</button>
 </div>
+<h4>{{inputtedValue}}</h4> <br>
 
-<h4>{{inputtedValue}}</h4>
+<button (click)="showLoginForm()">Show Login Form</button> <br>
 
-<p></p>
-<p></p>
-<button (click)="showLoginForm()">Show Login Form</button>
-<p></p>
-<p></p>
-<button (click)="showRegisterForm()">Show Register Form</button>
-<p></p>
-<p></p>
+<button (click)="showRegisterForm()">Show Register Form</button> <br>
+
 <form *ngIf="formLogin">
   <label>
     E-mail:
@@ -24,13 +18,9 @@
     Password:
     <input type="text">
   </label>
-</form>
-
-<p></p>
-<p></p>
+</form> <br>
 
 <form *ngIf="formRegister">
-
   <label>
     Name:
     <input type="text">
@@ -45,24 +35,25 @@
     Password:
     <input type="text">
   </label>
+</form> <br>
 
-</form>
-
-<p></p>
-<p></p>
 <button (click)="showHouses()">Show All Houses</button>
 
 <div *ngIf="housesList">
   <div *ngFor="let house of houses">
-    <p></p>
-    City: {{house.city}}
-    Street: {{house.street}}
-    Square: {{house.square}}
-    Price: {{house.price}}
+    <div [ngClass]="{'border-red':house.owner.is_blocked}">
+      <p>City: {{house.city}}</p>
+      <p>Street: {{house.street}}</p>
+      <p>Square: {{house.square}}</p>
+      <p>Price: {{house.price}}</p>
+      <button (click)="showFullInfo(house.id)">Show Full Info</button>
+
+      <div *ngIf="housesMap[house.id]">
+        <p>Owner: {{house.owner | json}}</p>
+      </div>
+    </div>
   </div>
-</div>
-<p></p>
-<p></p>
+</div> <br>
 
 <div>
   <label>
@@ -72,6 +63,88 @@
 
   <button (click)="cityFinder(cityInput.value)">Show houses!</button>
 </div>
-{{findedHouses | json}}
+{{foundHouses | json}} <br>
 
+<!--Form Registration User-->
+<form #registrationForm="ngForm" (ngSubmit)="sendRegisterForm()">
+  <h3>Registration User Form</h3>
+  <label [ngStyle]="{color: !nameInput.valid && nameInput.touched ? 'red' : 'black'}">Name</label>
+  <input
+    type="text" name="name"
+    [(ngModel)]="userRegister.name"
+    #nameInput="ngModel"
+    required
+    minlength="3"
+  >
+  <label [ngStyle]="{color: !emailInput.valid && emailInput.touched ? 'red' : 'black'}">Email</label>
+  <input
+    type="text" name="email"
+    #emailInput="ngModel"
+    [(ngModel)]="userRegister.email"
+    email
+  >
+  <label [ngStyle]="{color: !passwordInput.valid && passwordInput.touched ? 'red' : 'black'}">Password</label>
+  <input
+    type="text" name="password"
+    [(ngModel)]="userRegister.password"
+    #passwordInput="ngModel"
+    minlength="3"
+  >
+  <button>Send</button>
+</form> <br>
+
+<!--Form Login User-->
+<form (ngSubmit)="sendLoginForm()">
+  <h3>Login User Form</h3>
+  <label [ngStyle]="{color: !emailInput.valid && emailInput.touched ? 'red' : 'black'}">Email</label>
+  <input
+    type="text" name="email"
+    #emailInput="ngModel"
+    [(ngModel)]="userLogin.email"
+    email
+  >
+  <label [ngStyle]="{color: !passwordInput.valid && passwordInput.touched ? 'red' : 'black'}">Password</label>
+  <input
+    type="text" name="password"
+    [(ngModel)]="userLogin.password"
+    #passwordInput="ngModel"
+    minlength="3"
+  >
+  <button>Send</button>
+</form> <br>
+
+<!--Form Registration House-->
+<form #registrationHouse="ngForm" (ngSubmit)="sendRegisterHouseForm()">
+  <h3>Registration House Form</h3>
+  <label [ngStyle]="{color: !cityInput.valid && cityInput.touched ? 'red' : 'black'}">City</label>
+  <input
+    type="text" name="city"
+    [(ngModel)]="houseRegister.city"
+    #cityInput="ngModel"
+    required
+    minlength="3"
+  >
+  <label [ngStyle]="{color: !streetInput.valid && streetInput.touched ? 'red' : 'black'}">Street</label>
+  <input
+    type="text" name="street"
+    #streetInput="ngModel"
+    [(ngModel)]="houseRegister.street"
+  >
+  <label [ngStyle]="{color: !squareInput.valid && squareInput.touched ? 'red' : 'black'}">Square</label>
+  <input
+    type="number" name="square"
+    [(ngModel)]="houseRegister.square"
+    #squareInput="ngModel"
+    min="3"
+  >
+  <label [ngStyle]="{color: !priceInput.valid && priceInput.touched ? 'red' : 'black'}">Price</label>
+  <input
+    type="number" name="price"
+    #priceInput="ngModel"
+    [(ngModel)]="houseRegister.price"
+    min="3"
+    max="15"
+  >
+  <button>Send</button>
+</form>
 

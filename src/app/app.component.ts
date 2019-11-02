@@ -11,14 +11,43 @@ export class AppComponent {
   formLogin = false;
   formRegister = false;
   housesList = false;
-  findedHouses = [];
+  foundHouses = [];
+  housesMap = {};
+  users = [
+    {name: 'Viktorija', email: 'vika@gmail.com', password: '12345', is_blocked: false},
+    {name: 'Tanja', email: 'tanja@gmail.com', password: '54321', is_blocked: false},
+    {name: 'Ivan', email: 'ivan@gmail.com', password: '567890', is_blocked: true},
+    {name: 'Igor', email: 'igor@gmail.com', password: '098765', is_blocked: false},
+    {name: 'Taras', email: 'taras@gmail.com', password: '135791', is_blocked: true},
+  ];
   houses = [
-    {city: 'Lviv', street: 'Shevchenka', square: 200, price: 80000},
-    {city: 'Kyiv', street: 'Naukova', square: 150, price: 50000},
-    {city: 'Dnipro', street: 'Antonycha', square: 100, price: 70000},
-    {city: 'Ternopil', street: 'Franka', square: 140, price: 20000},
+    {city: 'Lviv', street: 'Shevchenka', square: 200, price: 80000, id: 1, owner: this.users[0]},
+    {city: 'Kyiv', street: 'Naukova', square: 150, price: 50000, id: 2, owner: this.users[1]},
+    {city: 'Dnipro', street: 'Antonycha', square: 100, price: 70000, id: 3, owner: this.users[2]},
+    {city: 'Ternopil', street: 'Franka', square: 140, price: 20000, id: 4, owner: this.users[3]},
   ];
 
+  userRegister = {
+    name: '',
+    email: '',
+    password: ''
+  };
+
+  userLogin = {
+    email: '',
+    password: ''
+  };
+
+  houseRegister = {
+    city: '',
+    street: '',
+    square: 0,
+    price: 0,
+  };
+
+  constructor() {
+    this.houses.map((house) => this.housesMap[house.id] = false);
+  }
 
   onInput(value: string) {
     if (value) {
@@ -41,9 +70,41 @@ export class AppComponent {
   }
 
   cityFinder(value: string) {
-     this.findedHouses = this.houses.filter(house => value === house.city);
+    this.foundHouses = this.houses.filter(house => value === house.city);
+  }
+
+  showFullInfo(id: number) {
+    // console.log(this.housesMap);
+    // console.log(id);
+    this.housesMap[id] = !this.housesMap[id];
+  }
+
+  getRandomBlocked() {
+    return Math.random() >= 0.5;
+  }
+
+  getRandomOwner() {
+    return this.users[Math.floor(Math.random() * this.users.length)];
+  }
+
+  sendRegisterForm() {
+    const newUser = {...this.userRegister, is_blocked: this.getRandomBlocked()};
+    this.users.push(newUser);
+  }
+
+  sendLoginForm() {
+    const checkUserExists = this.users.find(({email, password}) => email === this.userLogin.email && password === this.userLogin.password);
+    checkUserExists ? console.log('Welcome') : console.log('User not found');
+  }
+
+  sendRegisterHouseForm() {
+    const newHouse = {...this.houseRegister, id: this.houses.length + 1, owner: this.getRandomOwner()};
+    this.houses.push(newHouse);
+    this.housesMap[newHouse.id] = false;
   }
 }
+
+
 
 
 
