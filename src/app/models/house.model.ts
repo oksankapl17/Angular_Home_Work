@@ -8,3 +8,10 @@ export interface IHouseModel {
   id: number;
   owner: IUserModel;
 }
+
+export interface IHouseRegisterModel {
+  city: string;
+  street: string;
+  square: number;
+  price: number;
+}
