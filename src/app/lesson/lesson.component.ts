@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LessonComponent implements OnInit {
   isError = false;
-  classes = {'green-bg': this.isError, 'red-bg': !this.isError, 'white-color': true};
+  classes = { 'green-bg': this.isError, 'red-bg': !this.isError, 'white-color': true };
   developer = {
     name: '',
     email: '',
@@ -19,7 +19,6 @@ export class LessonComponent implements OnInit {
   };
   isFullInfo = false;
 
-
   constructor() {
     setTimeout(() => {
       this.isError = true;
@@ -28,12 +27,9 @@ export class LessonComponent implements OnInit {
     }, 4000);
   }
 
-
   sendForm(form) {
     console.log(form);
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

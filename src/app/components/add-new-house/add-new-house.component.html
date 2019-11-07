@@ -1,0 +1,12 @@
+<form (ngSubmit)="sendRegisterHouseForm()">
+  <h3>Add New House Form</h3>
+  <label [ngStyle]="{ color: !cityInput.valid && cityInput.touched ? 'red' : 'black' }">City</label>
+  <input type="text" name="city" [(ngModel)]="houseRegister.city" #cityInput="ngModel" required minlength="3" />
+  <label [ngStyle]="{ color: !streetInput.valid && streetInput.touched ? 'red' : 'black' }">Street</label>
+  <input type="text" name="street" #streetInput="ngModel" [(ngModel)]="houseRegister.street" />
+  <label [ngStyle]="{ color: !squareInput.valid && squareInput.touched ? 'red' : 'black' }">Square</label>
+  <input type="number" name="square" [(ngModel)]="houseRegister.square" #squareInput="ngModel" min="3" />
+  <label [ngStyle]="{ color: !priceInput.valid && priceInput.touched ? 'red' : 'black' }">Price</label>
+  <input type="number" name="price" #priceInput="ngModel" [(ngModel)]="houseRegister.price" min="3" max="15" />
+  <button type="submit">Send</button>
+</form>

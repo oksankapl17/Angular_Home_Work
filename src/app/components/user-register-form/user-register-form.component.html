@@ -1,0 +1,11 @@
+<form (ngSubmit)="sendRegisterForm()">
+  <h3>Registration User Form</h3>
+  <label [ngStyle]="{ color: !nameInput.valid && nameInput.touched ? 'red' : 'black' }">Name</label>
+  <input type="text" name="name" [(ngModel)]="userRegister.name" #nameInput="ngModel" required minlength="3" />
+  <label [ngStyle]="{ color: !emailInput.valid && emailInput.touched ? 'red' : 'black' }">Email</label>
+  <input type="text" name="email" #emailInput="ngModel" [(ngModel)]="userRegister.email" email />
+  <label [ngStyle]="{ color: !passwordInput.valid && passwordInput.touched ? 'red' : 'black' }">Password</label>
+  <input type="text" name="password" [(ngModel)]="userRegister.password" #passwordInput="ngModel" minlength="3" />
+  <button type="submit">Send</button>
+</form>
+<br />

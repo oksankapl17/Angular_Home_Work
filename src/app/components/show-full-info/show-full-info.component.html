@@ -1,0 +1,16 @@
+<div>
+  <div *ngFor="let house of houses">
+    <div [ngClass]="{ 'border-red': house.owner.is_blocked }">
+      <p>City: {{ house.city }}</p>
+      <p>Street: {{ house.street }}</p>
+      <p>Square: {{ house.square }}</p>
+      <p>Price: {{ house.price }}</p>
+      <button (click)="showFullInfo(house.id)">Show Full Info</button>
+
+      <div *ngIf="housesMap[house.id]">
+        <p>Owner: {{ house.owner | json }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<br />

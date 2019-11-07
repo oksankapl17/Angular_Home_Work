@@ -1,0 +1,9 @@
+<form (ngSubmit)="emitLoginForm()">
+  <h3>Login User Form</h3>
+  <label [ngStyle]="{ color: !emailInput.valid && emailInput.touched ? 'red' : 'black' }">Email</label>
+  <input type="text" name="email" #emailInput="ngModel" [(ngModel)]="userLogin.email" email />
+  <label [ngStyle]="{ color: !passwordInput.valid && passwordInput.touched ? 'red' : 'black' }">Password</label>
+  <input type="text" name="password" [(ngModel)]="userLogin.password" #passwordInput="ngModel" minlength="3" />
+  <button type="submit">Send</button>
+</form>
+<br />

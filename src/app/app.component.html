@@ -1,121 +1,36 @@
 <div>
-  <input #testInput type="text">
+  <input #testInput type="text" />
   <button (click)="onInput(testInput.value)">Show input value!</button>
 </div>
-<h4>{{inputtedValue}}</h4> <br>
+<h4>{{ inputtedValue }}</h4>
+<br />
 
-<button (click)="showHouses()">Show All Houses</button> <br>
+<!--Show full info-->
+<button (click)="showHouses()">Show All Houses</button> <br />
 
-<div *ngIf="housesList">
-  <div *ngFor="let house of houses">
-    <div [ngClass]="{'border-red':house.owner.is_blocked}">
-      <p>City: {{house.city}}</p>
-      <p>Street: {{house.street}}</p>
-      <p>Square: {{house.square}}</p>
-      <p>Price: {{house.price}}</p>
-      <button (click)="showFullInfo(house.id)">Show Full Info</button>
-
-      <div *ngIf="housesMap[house.id]">
-        <p>Owner: {{house.owner | json}}</p>
-      </div>
-    </div>
-  </div>
-</div> <br>
+<app-show-full-info *ngIf="showHousesList" [houses]="houses" [housesMap]="housesMap"></app-show-full-info>
 
 <div>
   <label>
     City:
-    <input #cityInput type="text">
+    <input #cityInput type="text" />
   </label>
 
   <button (click)="cityFinder(cityInput.value)">Show houses!</button>
 </div>
-{{foundHouses | json}} <br>
+{{ foundHouses | json }} <br />
 
-<button (click)="showLoginForm()">Show Login Form</button> <br>
-
-<button (click)="showRegisterForm()">Show Register Form</button> <br>
+<button (click)="showLoginForm()">Show Login Form</button> <br />
+<button (click)="showRegisterForm()">Show Register Form</button> <br />
 
 <!--Form Registration User-->
-<form *ngIf="formRegister" (ngSubmit)="sendRegisterForm()">
-  <h3>Registration User Form</h3>
-  <label [ngStyle]="{color: !nameInput.valid && nameInput.touched ? 'red' : 'black'}">Name</label>
-  <input
-    type="text" name="name"
-    [(ngModel)]="userRegister.name"
-    #nameInput="ngModel"
-    required
-    minlength="3"
-  >
-  <label [ngStyle]="{color: !emailInput.valid && emailInput.touched ? 'red' : 'black'}">Email</label>
-  <input
-    type="text" name="email"
-    #emailInput="ngModel"
-    [(ngModel)]="userRegister.email"
-    email
-  >
-  <label [ngStyle]="{color: !passwordInput.valid && passwordInput.touched ? 'red' : 'black'}">Password</label>
-  <input
-    type="text" name="password"
-    [(ngModel)]="userRegister.password"
-    #passwordInput="ngModel"
-    minlength="3"
-  >
-  <button>Send</button>
-</form> <br>
+<app-user-register-form *ngIf="formRegister" (addNewUser)="addNewUserToList($event)"></app-user-register-form>
 
 <!--Form Login User-->
-<form *ngIf="formLogin" (ngSubmit)="sendLoginForm()">
-  <h3>Login User Form</h3>
-  <label [ngStyle]="{color: !emailInput.valid && emailInput.touched ? 'red' : 'black'}">Email</label>
-  <input
-    type="text" name="email"
-    #emailInput="ngModel"
-    [(ngModel)]="userLogin.email"
-    email
-  >
-  <label [ngStyle]="{color: !passwordInput.valid && passwordInput.touched ? 'red' : 'black'}">Password</label>
-  <input
-    type="text" name="password"
-    [(ngModel)]="userLogin.password"
-    #passwordInput="ngModel"
-    minlength="3"
-  >
-  <button>Send</button>
-</form> <br>
+<app-user-login-form *ngIf="formLogin" (loginUser)="sendLoginForm($event)"></app-user-login-form>
+<p *ngIf="loginInfo">{{ loginInfo }}</p>
 
 <!--Form Add New House-->
-<form  (ngSubmit)="sendRegisterHouseForm()">
-  <h3>Add New House Form</h3>
-  <label [ngStyle]="{color: !cityInput.valid && cityInput.touched ? 'red' : 'black'}">City</label>
-  <input
-    type="text" name="city"
-    [(ngModel)]="houseRegister.city"
-    #cityInput="ngModel"
-    required
-    minlength="3"
-  >
-  <label [ngStyle]="{color: !streetInput.valid && streetInput.touched ? 'red' : 'black'}">Street</label>
-  <input
-    type="text" name="street"
-    #streetInput="ngModel"
-    [(ngModel)]="houseRegister.street"
-  >
-  <label [ngStyle]="{color: !squareInput.valid && squareInput.touched ? 'red' : 'black'}">Square</label>
-  <input
-    type="number" name="square"
-    [(ngModel)]="houseRegister.square"
-    #squareInput="ngModel"
-    min="3"
-  >
-  <label [ngStyle]="{color: !priceInput.valid && priceInput.touched ? 'red' : 'black'}">Price</label>
-  <input
-    type="number" name="price"
-    #priceInput="ngModel"
-    [(ngModel)]="houseRegister.price"
-    min="3"
-    max="15"
-  >
-  <button>Send</button>
-</form>
+<app-add-new-house (addNewHouse)="addNewHousetoList($event)"></app-add-new-house>
 
+{{ 9000 | convert: 24.2 }}

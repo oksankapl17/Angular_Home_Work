@@ -1,4 +1,4 @@
-import {IUserModel} from './user.model';
+import { IUserModel } from './user.model';
 
 export interface IHouseModel {
   city: string;
