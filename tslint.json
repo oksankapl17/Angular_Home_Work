@@ -43,6 +43,11 @@
         ]
       }
     ],
+    "no-submodule-imports": {
+      "options": [
+        "@angular/common"
+      ]
+    },
     "no-consecutive-blank-lines": false,
     "no-console": [
       true,

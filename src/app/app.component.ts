@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IHouseModel, IUserModel } from './models';
+import { TodoService } from './services/todo.service';
+import { PostService } from './services/post.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'angular-app';
   inputtedValue = '';
   formRegister = false;
@@ -31,8 +33,17 @@ export class AppComponent {
     { city: 'Ternopil', street: 'Franka', square: 140, price: 20000, id: 4, owner: this.users[3] }
   ];
 
-  constructor() {
+  constructor(public todoService: TodoService, public postService: PostService) {
     this.houses.map((house: IHouseModel) => (this.housesMap[house.id] = false));
+  }
+
+  ngOnInit(): void {
+    this.todoService.getTodos().subscribe(res => {
+      console.log(res);
+    });
+    this.postService.getPosts().subscribe(res => {
+      console.log(res);
+    });
   }
 
   onInput(value: string) {
